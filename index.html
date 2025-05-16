@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculators & Converters - Utility Tools | Glowbase</title>
+  <meta name="description" content="Free online calculators and converters: scientific, age, BMI, percentage, GST, profit & loss, loan calculators, SIP, retirement, image & text converters." />
+  <meta name="keywords" content="scientific calculator, age calculator, BMI calculator, percentage calculator, GST calculator, profit & loss, home loan calculator, car loan calculator, retirement calculator, SIP calculator, image converter, text converter" />
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512‑5sAR7xN1Nv6Tyw32NKEB+gp1R5ejZr8hHhE9UJTwp2t7d2WwIqhott6k9nfzK4oFhJ6k1QzYWX5Q8C7oRPU4Mw=="
+        crossorigin="anonymous" />
+
+  <style>
+    :root {
+      --accent1: #4b6cb7;
+      --accent2: #182848;
+      --accent3: #ff7e5f;
+      --accent4: #feb47b;
+      --bg: #f0f4f8;
+      --card-bg: #fff;
+      --text: #333;
+      --radius: 8px;
+      --gap: 1rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header, footer {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem var(--gap);
+    }
+    .main-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: var(--gap);
+      flex-wrap: wrap;
+      margin-top: var(--gap);
+    }
+    .main-menu li { position: relative; }
+    .main-menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem;
+      font-weight: 600;
+      transition: opacity .2s;
+    }
+    .main-menu a:hover { opacity: .8; }
+    .has-dropdown .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      z-index: 10;
+    }
+    .has-dropdown .dropdown li { width: 200px; }
+    .has-dropdown .dropdown a {
+      color: #333;
+      display: block;
+      padding: 0.5rem 1rem;
+    }
+    .has-dropdown .dropdown a:hover {
+      background: #f0f4f8;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: var(--gap) auto;
+      padding: 0 var(--gap);
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: var(--gap);
+      margin-bottom: 2rem;
+    }
+    .tool-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: var(--gap);
+      text-align: center;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .tool-card i {
+      color: var(--accent3);
+      margin-bottom: 0.5rem;
+    }
+    .tool-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .tool-card p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .ads {
+      grid-column: 1/-1;
+      background: #fff3cd;
+      border: 1px dashed #ffeeba;
+      border-radius: var(--radius);
+      padding: var(--gap);
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: var(--gap);
+    }
+    section {
+      background: var(--card-bg);
+      padding: var(--gap);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: var(--gap);
+    }
+    section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    section h2 {
+      font-size: 1.25rem;
+      margin-bottom: .75rem;
+      background: linear-gradient(90deg, var(--accent3), var(--accent4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    input, select, textarea {
+      font: inherit;
+      padding: .75rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      margin-bottom: .75rem;
+      width: 100%;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent1);
+    }
+    button {
+      font: inherit;
+      padding: .75rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--accent1);
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s;
+      width: 100%;
+    }
+    button:hover { background: var(--accent2); }
+    section p, section pre {
+      background: #eaf4ff;
+      padding: .75rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      margin-top: .5rem;
+    }
+    #imgDownload {
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .5rem 1rem;
+      background: var(--accent1);
+      color: #fff;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s;
+    }
+    #imgDownload:hover { background: var(--accent2); }
+
+    @media (max-width: 400px) {
+      .main-menu { flex-direction: column; }
+      .tool-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Glowbase Utility Toolkit</h1>
+    <ul class="main-menu">
+      <li><a href="index.html">Text Tools</a></li>
+      <li><a href="tools-url-number.html">Encoders & Numbers</a></li>
+      <li class="has-dropdown">
+        <a href="#" id="calcMenuToggle">Calculators <i class="fa fa-caret-down"></i></a>
+        <ul class="dropdown" id="calcMenu"></ul>
+      </li>
+      <li><a href="tools-random.html">Random Utilities</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="location.href='#scientific-calc'">
+        <i class="fa fa-calculator fa-2x"></i>
+        <h3>Scientific Calculator</h3>
+        <p>Advanced math expressions</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#home-loan'">
+        <i class="fa fa-home fa-2x"></i>
+        <h3>Home Loan EMI</h3>
+        <p>Monthly home loan EMI</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#bmi-calc'">
+        <i class="fa fa-weight fa-2x"></i>
+        <h3>BMI Calculator</h3>
+        <p>Body mass index</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#percent-calc'">
+        <i class="fa fa-percent fa-2x"></i>
+        <h3>Percentage</h3>
+        <p>Calculate percentage</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#gst-calc'">
+        <i class="fa fa-tags fa-2x"></i>
+        <h3>GST Calculator</h3>
+        <p>Compute GST & total</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#pl-calc'">
+        <i class="fa fa-chart-line fa-2x"></i>
+        <h3>Profit & Loss</h3>
+        <p>Profit or loss %</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#car-loan'">
+        <i class="fa fa-car fa-2x"></i>
+        <h3>Car Loan EMI</h3>
+        <p>Monthly car EMI</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#retirement-calc'">
+        <i class="fa fa-umbrella-beach fa-2x"></i>
+        <h3>Retirement</h3>
+        <p>Future corpus</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#sip-calc'">
+        <i class="fa fa-piggy-bank fa-2x"></i>
+        <h3>SIP Calculator</h3>
+        <p>Investment maturity</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#age-calc'">
+        <i class="fa fa-birthday-cake fa-2x"></i>
+        <h3>Age Calculator</h3>
+        <p>Calculate your age</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#txt-converter'">
+        <i class="fa fa-font fa-2x"></i>
+        <h3>Text Converter</h3>
+        <p>Upper/Lowercase</p>
+      </div>
+      <div class="tool-card" onclick="location.href='#image-converter'">
+        <i class="fa fa-image fa-2x"></i>
+        <h3>Image Converter</h3>
+        <p>JPEG ↔️ PNG</p>
+      </div>
+    </div>
+
+    <div class="ads">Ad Banner Placeholder (728×90)</div>
+
+    <!-- Sections: scientific-calc, bmi-calc, percent-calc, gst-calc, pl-calc, home-loan, car-loan, retirement, sip, age, txt-converter, image-converter -->
+
+    <section id="scientific-calc">
+      <h2>Scientific Calculator</h2>
+      <input type="text" id="sciInput" placeholder="e.g. 2+3*4" />
+      <button onclick="calcScientific()">Calculate</button>
+      <p id="sciResult">Result:</p>
+    </section>
+
+    <section id="home-loan">
+      <h2>Home Loan Calculator</h2>
+      <input type="number" id="hl-principal" placeholder="Principal (₹)" />
+      <input type="number" id="hl-rate" placeholder="Rate (%)" />
+      <input type="number" id="hl-years" placeholder="Tenure (yrs)" />
+      <button onclick="calcLoan('hl')">Calculate EMI</button>
+      <p id="hlResult">EMI:</p>
+    </section>
+
+    <section id="bmi-calc">
+      <h2>BMI Calculator</h2>
+      <input type="number" id="height" placeholder="Height (cm)" />
+      <input type="number" id="weight" placeholder="Weight (kg)" />
+      <button onclick="calcBMI()">Calculate BMI</button>
+      <p id="bmiResult">BMI:</p>
+    </section>
+
+    <section id="percent-calc">
+      <h2>Percentage Calculator</h2>
+      <input type="number" id="part" placeholder="Part value" />
+      <input type="number" id="whole" placeholder="Whole value" />
+      <button onclick="calcPercentage()">Calculate %</button>
+      <p id="percentResult">%</p>
+    </section>
+
+    <section id="gst-calc">
+      <h2>GST Calculator</h2>
+      <input type="number" id="gstAmount" placeholder="Amount (₹)" />
+      <input type="number" id="gstRate" placeholder="GST Rate (%)" />
+      <button onclick="calcGST()">Calculate GST</button>
+      <p id="gstResult">Total:</p>
+    </section>
+
+    <section id="pl-calc">
+      <h2>Profit & Loss Calculator</h2>
+      <input type="number" id="costPrice" placeholder="Cost Price (₹)" />
+      <input type="number" id="sellingPrice" placeholder="Selling Price (₹)" />
+      <button onclick="calcPL()">Calculate P/L</button>
+      <p id="plResult">Result:</p>
+    </section>
+
+    <section id="car-loan">
+      <h2>Car Loan Calculator</h2>
+      <input type="number" id="cl-principal" placeholder="Principal (₹)" />
+      <input type="number" id="cl-rate" placeholder="Rate (%)" />
+      <input type="number" id="cl-years" placeholder="Tenure (yrs)" />
+      <button onclick="calcLoan('cl')">Calculate EMI</button>
+      <p id="clResult">EMI:</p>
+    </section>
+
+    <section id="retirement-calc">
+      <h2>Retirement Calculator</h2>
+      <input type="number" id="current-age" placeholder="Current age" />
+      <input type="number" id="ret-age" placeholder="Retirement age" />
+      <input type="number" id="monthly-saving" placeholder="Monthly saving (₹)" />
+      <button onclick="calcRetirement()">Calculate Corpus</button>
+      <p id="retResult">Corpus:</p>
+    </section>
+
+    <section id="sip-calc">
+      <h2>SIP Calculator</h2>
+      <input type="number" id="sip-amount" placeholder="SIP amount (₹)" />
+      <input type="number" id="sip-rate" placeholder="Return (%)" />
+      <input type="number" id="sip-years" placeholder="Tenure (yrs)" />
+      <button onclick="calcSIP()">Calculate Maturity</button>
+      <p id="sipResult">Maturity:</p>
+    </section>
+
+    <section id="age-calc">
+      <h2>Age Calculator</h2>
+      <input type="date" id="dob" />
+      <button onclick="calcAge()">Calculate Age</button>
+      <p id="ageResult">You are:</p>
+    </section>
+
+    <section id="txt-converter">
+      <h2>Text Converter</h2>
+      <textarea id="txtInput" placeholder="Enter text..."></textarea>
+      <button onclick="txtConvert('upper')">UPPERCASE</button>
+      <button onclick="txtConvert('lower')">lowercase</button>
+      <p id="txtResult"></p>
+    </section>
+
+    <section id="image-converter">
+      <h2>Image Converter</h2>
+      <input type="file" id="imgInput" accept="image/png, image/jpeg" onchange="convertImage()" />
+      <a id="imgDownload" href="#" download>Download Converted</a>
+    </section>
+
+    <div class="ads">Responsive Ad Placeholder</div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Glowbase. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Dropdown population & toggle
+    const popularCalculators = [
+      { name:'Scientific Calculator', href:'#scientific-calc' },
+      { name:'Home Loan EMI', href:'#home-loan' },
+      { name:'BMI Calculator', href:'#bmi-calc' },
+      { name:'GST Calculator', href:'#gst-calc' },
+      { name:'SIP Calculator', href:'#sip-calc' },
+      { name:'Age Calculator', href:'#age-calc' },
+      { name:'Profit & Loss', href:'#pl-calc' },
+      { name:'Percentage Calculator', href:'#percent-calc' },
+      { name:'Car Loan EMI', href:'#car-loan' },
+      { name:'Retirement Corpus', href:'#retirement-calc' },
+      { name:'Text Converter', href:'#txt-converter' },
+      { name:'Image Converter', href:'#image-converter' }
+    ];
+    const calcMenu = document.getElementById('calcMenu');
+    popularCalculators.forEach(calc => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${calc.href}">${calc.name}</a>`;
+      calcMenu.appendChild(li);
+    });
+    document.getElementById('calcMenuToggle')
+      .addEventListener('click', e => {
+        e.preventDefault();
+        calcMenu.style.display = calcMenu.style.display==='block'?'none':'block';
+      });
+    document.addEventListener('click', e => {
+      if(!e.target.closest('.has-dropdown')) calcMenu.style.display='none';
+    });
+
+    // Tool functions
+    function calcScientific() {
+      try {
+        const res = eval(document.getElementById('sciInput').value);
+        document.getElementById('sciResult').textContent = 'Result: ' + res;
+      } catch {
+        document.getElementById('sciResult').textContent = 'Invalid expression';
+      }
+    }
+    function calcLoan(type) {
+      const P=+document.getElementById(type+'-principal').value,
+            r=+document.getElementById(type+'-rate').value/1200,
+            n=+document.getElementById(type+'-years').value*12;
+      if(!P||!r||!n) return document.getElementById(type+'Result').textContent='Enter valid numbers';
+      const emi=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+      document.getElementById(type+'Result').textContent='EMI: ₹'+emi.toFixed(2);
+    }
+    function calcBMI() {
+      const h=+document.getElementById('height').value/100,
+            w=+document.getElementById('weight').value;
+      if(!h||!w) return document.getElementById('bmiResult').textContent='Enter valid numbers';
+      document.getElementById('bmiResult').textContent='BMI: '+(w/(h*h)).toFixed(2);
+    }
+    function calcPercentage() {
+      const p=+document.getElementById('part').value,
+            w=+document.getElementById('whole').value;
+      if(!p||!w) return document.getElementById('percentResult').textContent='Enter valid numbers';
+      document.getElementById('percentResult').textContent='Percentage: '+((p/w)*100).toFixed(2)+'%';
+    }
+    function calcGST() {
+      const amt=+document.getElementById('gstAmount').value,
+            rate=+document.getElementById('gstRate').value;
+      if(!amt||!rate) return document.getElementById('gstResult').textContent='Enter valid numbers';
+      const gstAmt=(amt*rate/100).toFixed(2),
+            total=(amt+ +gstAmt).toFixed(2);
+      document.getElementById('gstResult').textContent=`GST: ₹${gstAmt}, Total: ₹${total}`;
+    }
+    function calcPL() {
+      const cp=+document.getElementById('costPrice').value,
+            sp=+document.getElementById('sellingPrice').value;
+      if(!cp||!sp) return document.getElementById('plResult').textContent='Enter valid numbers';
+      const diff=(sp-cp).toFixed(2);
+      if(diff>0) {
+        document.getElementById('plResult').textContent=`Profit: ₹${diff} (${((diff/cp)*100).toFixed(2)}%)`;
+      } else if(diff<0) {
+        const loss=Math.abs(diff).toFixed(2);
+        document.getElementById('plResult').textContent=`Loss: ₹${loss} (${((loss/cp)*100).toFixed(2)}%)`;
+      } else {
+        document.getElementById('plResult').textContent='No profit no loss';
+      }
+    }
+    function calcRetirement() {
+      const c=+document.getElementById('current-age').value,
+            r=+document.getElementById('ret-age').value,
+            m=+document.getElementById('monthly-saving').value;
+      if(!c||!r||!m||r<=c) return document.getElementById('retResult').textContent='Enter valid inputs';
+      document.getElementById('retResult').textContent='Corpus: ₹'+(m*((r-c)*12)).toFixed(2);
+    }
+    function calcSIP() {
+      const M=+document.getElementById('sip-amount').value,
+            R=+document.getElementById('sip-rate').value/1200,
+            N=+document.getElementById('sip-years').value*12;
+      if(!M||!R||!N) return document.getElementById('sipResult').textContent='Enter valid inputs';
+      document.getElementById('sipResult').textContent='Maturity: ₹'+(M*((Math.pow(1+R,N)-1)/R)*(1+R)).toFixed(2);
+    }
+    function calcAge() {
+      const dob=new Date(document.getElementById('dob').value),
+            diff=Date.now()-dob.getTime(),
+            yrs=new Date(diff).getUTCFullYear()-1970;
+      document.getElementById('ageResult').textContent='You are: '+yrs+' years';
+    }
+    function txtConvert(type) {
+      const txt=document.getElementById('txtInput').value;
+      document.getElementById('txtResult').textContent= type==='upper'? txt.toUpperCase(): txt.toLowerCase();
+    }
+    function convertImage() {
+      const file=document.getElementById('imgInput').files[0];
+      if(!file) return;
+      const reader=new FileReader();
+      reader.onload=e=>{
+        const img=new Image();
+        img.onload=()=>{
+          const canvas=document.createElement('canvas');
+          canvas.width=img.width; canvas.height=img.height;
+          canvas.getContext('2d').drawImage(img,0,0);
+          const outType=file.type==='image/png'?'image/jpeg':'image/png';
+          document.getElementById('imgDownload').href=canvas.toDataURL(outType);
+          document.getElementById('imgDownload').download='converted.'+outType.split('/')[1];
+        };
+        img.src=e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+</body>
+</html>
